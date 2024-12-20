@@ -53,6 +53,7 @@ extensions.extend(
         "sphinx.ext.ifconfig",
         "sphinxcontrib.details.directive",
         "sphinx_toolbox.collapse",
+        "sphinxext.rediraffe",
     )
 )
 
@@ -99,3 +100,13 @@ craft_parts_docs_path = pathlib.Path(craft_parts_docs.__file__).parent / "craft-
 (common_docs_path / "craft-parts").symlink_to(
     craft_parts_docs_path, target_is_directory=True
 )
+
+# Add redirects, so they can be updated here to land with docs being moved
+rediraffe_branch = "main"
+# rediraffe_redirects = "redirects.txt"
+
+# Client-side redirects. These could be handled in a separate redirects file
+# instead. Paths are relative to `docs` directory.
+rediraffe_redirects = {
+    "howto/craft-for-platforms/index.rst": "howto/craft-a-snap/index.rst"
+}
