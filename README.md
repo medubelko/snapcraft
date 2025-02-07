@@ -86,6 +86,6 @@ We welcome any suggestions and help with the docs. The [Canonical Open Documenta
 
 ## License and copyright
 
-Snapcraft is released under the [GPL-3.0 license](COPYING).
+Snapcraft is released under the [GPL-3.0 license](LICENSE).
 
 © 2015-2025 Canonical Ltd.
