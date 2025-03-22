@@ -3,73 +3,87 @@
 Configure a snap's basics
 =========================
 
-Global metadata attributes are used within snapcraft.yaml to identify the snap locally, and after publishing to the Snap Store, to identify your snap to users and potential users.
+The snap-wide properties, typically set at the start of a project file, define the
+essentials of the snap, like its identity, authors, what machines it builds for, and its
+publication information for the store.
 
-Attributes include a snap’s name and description, its level of confinement, and where the application icon can be found.
-
-name: qfsview
-summary: Visualise storage utilisation.
-description: |
-    qFSView displays files and folders as a rectangle with an
-    area proportional to the storage they and their children use.
-version: 1.0
-icon: gui/qfsview.png
-base: core18
-grade: stable
-confinement: strict
-
-For the complete list of global metadata, see Snapcraft top-level metadata.
+Global metadata is a mixture of required and optional keys. The complete list of
+top-level keys is in the `snapcraft.yaml reference
+<https://snapcraft.io/docs/snapcraft-yaml-schema#p-21225-top-level-directives>`_.
 
 
-For convenience, and to help avoid duplicating sources, external metadata such as AppStream can be imported into snapcraft.yaml. See Using external metadata for further details.
+Configure the required keys
+---------------------------
 
+When you initialize a snap, it populates ``snapcraft.yaml`` with a set of required and
+recommended keys needed.
 
-Add required metadata
----------------------
+.. code-block:: yaml
+    :caption: snapcraft.yaml
 
-Global metadata is a mixture of mandatory and optional values.
-
-You can generate a buildable template of both required and recommended values with the snapcraft init command in a new project folder (see Snapcraft overview for more details).
-
-The following attributes are mandatory:
-
-    name A snap’s name is important. It must start with an ASCII character and can only contain 1) letters in lower case, 2) numbers, and 3) hyphens, and it can’t start or end with a hyphen. For the Snap Store, it also needs to be both unique and easy to find.
-
-    For help on choosing a name and registering it on the Snap Store, see Registering your app name.
-
-    summary The summary is a short descriptive sentence to tell prospective users about an application’s primary purpose, in fewer than 80 characters.
-
-    description Unlike the summary, the description can be as verbose as you need it to be. The above snippet shows the description text following a pipe symbol (|), which is used in YAML to maintain newline formatting in multiline text blocks.
-
-    The following, for example, will ensure both Line one and Line two appear on separate lines:
-
+    name: newtest
+    base: core24
+    version: '0.1'
+    summary: Single-line elevator pitch for your amazing snap
     description: |
-        Line one
-        Line two
+      This is my-snap's description. You have a paragraph or two to tell the
+      most important story about your snap. Keep it under 100 words though,
+      we live in tweetspace and your description wants to look good in the snap
+      store.
 
-    While you shouldn’t write thousands of words, the more details you provide, the more likely people are to discover and use your application. Feature lists, update descriptions, a brief Getting started guide, are legitimate uses for the description.
+    grade: devel
+    confinement: devmode
 
-    version While having a value for version is mandatory, its value can be anything. Setting this to something like test makes sense while you’re first building your snap, and you can later replace this with a specific version, or a reference to a script that replaces the version number automatically.
+    parts:
+      my-part:
+        plugin: nil
 
-    The value for version is also commonly imported for external metadata. See Using using external metadata for further details.
+When crafting a snap, you should define these essential keys:
 
-        base A base snap is a special kind of snap that provides a run-time environment with a minimal set of libraries that are common to most applications.
+- For ``name``, give your snap a unique name to distinguish it from all others. The
+  name can only contain lowercase letters, numbers, and hyphens. It must start with an
+  ASCII character, and can't end with a hyphen. If you plan on publishing the snap to a
+  store like the Snap Store, the name must also be unique in that store.
 
-    See Base snaps for help selecting a base for your snap.
+  .. For help on choosing a name and registering it on the Snap Store, see `Registering
+     your app name <>`_.
 
-    grade This should initially be devel and changed to stable when you have a snap ready for release.
+- For ``base``, set the version of Ubuntu that the snap will use for its runtime
+  environment. :ref:`how-to-bases` are a complex topic that is out of scope for this
+  guide. Unless you're building a snap compatible with older code, leave this as
+  ``core24``.
 
-    confinement A snap’s confinement level is the degree of isolation it has from your system. When first building a snap, set this to devmode to initially limit the side-effects of confinement until you have a working snap.
+- For ``version``, set the initial version of your snap. This key is a simple string, so
+  you can use any version schema. You can later replace this with a different version,
+  or fill this string automatically with a script.
 
-    See Snap confinement for further details.
+- For ``summary``, provide a short sentence to tell prospective users about your
+  snap's purpose. It must be in fewer than 80 characters.
+
+- For ``description``, describe your snap in as much detail and space as you need.
+  Notice the pipe (|) on the first line, which splits the description across multiple
+  lines. The text is processed as Markdown, so most Markdown syntax is supported.
+
+  You should keep the length reasonable, but the more details you provide, the more
+  likely people are to discover and use your snap. Feature lists, update descriptions,
+  and a brief *Getting started* guide are legitimate uses for the description.
+
+- For ``grade``, specify the production readiness of your snap. While developing, leave
+  this set to ``devel`` to disable the snapd guardrails. When your snap is ready for
+  release, set it to ``stable``.
+
+- For ``confinement``, set how strong the sandboxing of the snap is. A snap's
+  confinement level is the degree of isolation it has from the host system. When first
+  crafting, leave this as ``devmode`` to disable sandboxing until you have a working
+  snap. In the rare case where your snap needs higher levels of system access, like a
+  traditional unsandboxed package, you can :ref:`enable classic confinement
+  <how-to-enable-classic-confinement>`.
 
 
-Add optional metadata
----------------------
+Reuse identifying information
+-----------------------------
 
-
-Copy metadata from other sources
---------------------------------
+For convenience, and to help avoid duplicating sources, external metadata such as AppStream can be imported into snapcraft.yaml.
 
 To help avoid unnecessary duplication, and for convenience, Snapcraft can process and incorporate external metadata from within snapcraft.yaml by using parse-info within a part and a corresponding adopt-info key.
 
@@ -94,35 +108,39 @@ An external metadata source can be one of the following:
 From AppStream metadata
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-AppStream is a metadata standard used to describe a common set software components. It can be parsed by snapcraft to provide the title, version, summary, description and icon for a snap, along with the location of an app’s desktop file.
+AppStream is a metadata standard used to describe a common set software components. It can be parsed by snapcraft to provide the title, version, summary, description and icon for a snap, along with the location of an app's desktop file.
 
-The following is a typical example from an upstream project. It’s an AppStream file called sampleapp.metainfo.xml:
+The following is a typical example from an upstream project. It's an AppStream file called sampleapp.metainfo.xml:
 
-<?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop-application">
-  <id>com.example.sampleapp</id>
-  <name>Sample App</name>
-  <project_license>GPL-3.0+</project_license>
-  <name>Sample App</name>
-  <summary>Single-line elevator pitch for your amazing application</summary>
-  <description>
-    This is applications's description. A paragraph or two to tell the
-    most important story about it.
-  </description>
-  <icon type="local">assets/icon.png</icon>
-  <launchable type="desktop-id">
-    com.example.sampleapp.desktop
-  </launchable>
-  <releases>
-    <release date="2019-11-27" version="4.2.8.0"/>
-  </releases>
-  <update_contact>example@example.com</update_contact>
-  <url type="homepage">example.com</url>
-  <url type="bugtracker">example.com</url>
-  <url type="vcs-browser">example.com</url>
-  <url type="translate">example.com</url>
-  <url type="donation">example.com</url>
-</component>
+
+.. code-block:: xml
+    :caption: sampelapp.metainfo.xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <component type="desktop-application">
+    <id>com.example.sampleapp</id>
+    <name>Sample App</name>
+    <project_license>GPL-3.0+</project_license>
+    <name>Sample App</name>
+    <summary>Single-line elevator pitch for your amazing application</summary>
+    <description>
+        This is applications's description. A paragraph or two to tell the
+        most important story about it.
+    </description>
+    <icon type="local">assets/icon.png</icon>
+    <launchable type="desktop-id">
+        com.example.sampleapp.desktop
+    </launchable>
+    <releases>
+        <release date="2019-11-27" version="4.2.8.0"/>
+    </releases>
+    <update_contact>example@example.com</update_contact>
+    <url type="homepage">example.com</url>
+    <url type="bugtracker">example.com</url>
+    <url type="vcs-browser">example.com</url>
+    <url type="translate">example.com</url>
+    <url type="donation">example.com</url>
+    </component>
 
 We adopt the above metadata into snapcraft.yaml with the following:
 
@@ -148,7 +166,7 @@ You can also link each app in your snap to specific AppStream metadata by pointi
 
 For backwards compatibility, some component ids in the AppStream metadata have a .desktop suffix. If this is the case for your application, the common-id of your app should also use that suffix.
 
-Note: The process to get the .desktop file entry from the AppStream metadata goes as follows. First, Snapcraft searches for a parsed AppStream file with the same component id as the app’s common-id and extracts the Desktop File ID (desktop-id) from that component. If that component doesn’t specify a desktop-id, Snapcraft will use the component id as the Desktop File ID. Snapcraft will then search for a desktop file matching the Desktop File ID in the usr/local/share and usr/share directories relative to the part source, and by following the Desktop File ID rules.
+Note: The process to get the .desktop file entry from the AppStream metadata goes as follows. First, Snapcraft searches for a parsed AppStream file with the same component id as the app's common-id and extracts the Desktop File ID (desktop-id) from that component. If that component doesn't specify a desktop-id, Snapcraft will use the component id as the Desktop File ID. Snapcraft will then search for a desktop file matching the Desktop File ID in the usr/local/share and usr/share directories relative to the part source, and by following the Desktop File ID rules.
 
 
 From scripts in parts
@@ -156,16 +174,18 @@ From scripts in parts
 
 Individual parts in your snapcraft.yaml can set the version and grade by using craftctl. All you need to do is select which part to adopt using adopt-info:
 
-# ...
-adopt-info: my-part
-# ...
-parts:
-  my-part:
-    # ...
-    override-pull: |
-      craftctl default
-      craftctl set version="my-version"
-      craftctl set grade="devel"
+.. code-block:: yaml
+    :caption: snapcraft.yaml
+
+    adopt-info: my-part
+    ...
+    parts:
+    my-part:
+      ...
+      override-pull: |
+        craftctl default
+        craftctl set version="my-version"
+        craftctl set grade="devel"
 
 
 
@@ -217,23 +237,29 @@ Using this method, the desktop entry file can have any name. During a build, sna
 
 In this example, the desktop file is generated by the build system and placed in the folder usr/share/applications/, relative from the root of the resulting snap. Since the prime folder is what eventually becomes the snap, we specify usr/share/applications/com.github.johnfactotum.Foliate.desktop as the path to the desktop file.
 
-apps:
-  foliate:
-    command: desktop-launch $SNAP/usr/bin/com.github.johnfactotum.Foliate
-    desktop: usr/share/applications/com.github.johnfactotum.Foliate.desktop
-    plugs:
-      - desktop
-      - desktop-legacy
-    ...
+.. code-block:: yaml
+    :caption: snapcraft.yaml
+
+    apps:
+    foliate:
+      command: desktop-launch $SNAP/usr/bin/com.github.johnfactotum.Foliate
+      desktop: usr/share/applications/com.github.johnfactotum.Foliate.desktop
+      plugs:
+        - desktop
+        - desktop-legacy
+        ...
 
 During a build, snapcraft will also try to change the Icon= path in the desktop entry file. However, you need to make sure that the Icon= path is accessible from the prime folder. This example replaces the icon path after pulling the source.
 
-parts:
-  foliate:
-    plugin: meson
-    meson-parameters: [--prefix=/snap/foliate/current/usr]
-    override-pull: |
-      snapcraftctl pull
+.. code-block:: yaml
+    :caption: snapcraft.yaml
 
-      # Point icon to the correct location
-      sed -i.bak -e 's|Icon=com.github.johnfactotum.Foliate|Icon=/usr/share/icons/hicolor/scalable/apps/com.github.johnfactotum.Foliate.svg|g' data/com.github.johnfactotum.Foliate.desktop.in
+    parts:
+    foliate:
+      plugin: meson
+      meson-parameters: [--prefix=/snap/foliate/current/usr]
+      override-pull: |
+        snapcraftctl pull
+
+        # Point icon to the correct location
+        sed -i.bak -e 's|Icon=com.github.johnfactotum.Foliate|Icon=/usr/share/icons/hicolor/scalable/apps/com.github.johnfactotum.Foliate.svg|g' data/com.github.johnfactotum.Foliate.desktop.in
