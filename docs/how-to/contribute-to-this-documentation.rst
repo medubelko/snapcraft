@@ -19,46 +19,6 @@ If you're unfamiliar with any of these activities, we recommend you first build 
 experience in :ref:`explanation-about-this-documentation-coda`.
 
 
-Documentation checklist
------------------------
-
-.. |checkbox| raw:: html
-
-    <input type="checkbox">
-
-**Start**
-
-|checkbox| Created or volunteered for issue on GitHub
-
-|checkbox| Local code in sync
-
-|checkbox| New branch created
-
-**Write**
-
-|checkbox| Changes made to pages and indexes
-
-|checkbox| New pages, rewritten pages, and broad edits documented in release notes
-
-|checkbox| Docs pass all local checks
-
-|checkbox| Changes committed
-
-|checkbox| Branch pushed to fork
-
-**Review**
-
-|checkbox| Pull request opened
-
-|checkbox| Docs pass all automatic checks
-
-|checkbox| All review comments addressed
-
-|checkbox| Pull request approved by two maintainers
-
-|checkbox| Pull request merged
-
-
 Set up
 ------
 
