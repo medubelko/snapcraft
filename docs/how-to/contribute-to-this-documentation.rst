@@ -1,3 +1,6 @@
+.. meta::
+    :description: How to improve the Snapcraft documentation. Develop, test, and review documents in the standard workflow.
+
 :relatedlinks: https://diataxis.fr, [Ubuntu&#32;Style&#32;Guide](https://docs.ubuntu.com/styleguide), [Starcraft&#32;style&#32;guide](https://canonical-starflow.readthedocs-hosted.com/how-to/starcraft-style-guide), [reStructuredText&#32;syntax&#32;reference](https://canonical-starter-pack.readthedocs-hosted.com/stable/reference/rst-syntax-reference)
 
 .. _contribute-to-this-documentation:
