@@ -1,4 +1,4 @@
-:relatedlinks: https://diataxis.fr, [Ubuntu&#32;Style&#32;Guide](https://docs.ubuntu.com/styleguide), [Inclusive&#32;terms](https://github.com/canonical/Inclusive-naming/blob/main/config.yml), [reStructuredText&#32;syntax&#32;reference](https://canonical-starter-pack.readthedocs-hosted.com/stable/reference/rst-syntax-reference)
+:relatedlinks: https://diataxis.fr, [Ubuntu&#32;Style&#32;Guide](https://docs.ubuntu.com/styleguide), [Starcraft&#32;style&#32;guide](https://canonical-starflow.readthedocs-hosted.com/how-to/starcraft-style-guide), [reStructuredText&#32;syntax&#32;reference](https://canonical-starter-pack.readthedocs-hosted.com/stable/reference/rst-syntax-reference)
 
 .. _contribute-to-this-documentation:
 .. _how-to-contribute-to-this-documentation:
