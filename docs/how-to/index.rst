@@ -83,4 +83,3 @@ to reconfigure your project as described by these guides.
     publishing/index
     debugging/index
     change-bases/index
-    contribute-to-this-documentation

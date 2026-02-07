@@ -54,4 +54,10 @@ feedback.
     how-to/index
     reference/index
     explanation/index
+
+.. toctree::
+    :hidden:
+    :caption: Project
+
     release-notes/index
+    contribute/index
