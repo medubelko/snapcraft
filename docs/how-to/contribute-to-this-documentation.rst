@@ -22,11 +22,11 @@ If you're unfamiliar with any of these activities, we recommend you first build 
 experience in :ref:`explanation-about-this-documentation-coda`.
 
 
-Set up
-------
+Set up the environment
+----------------------
 
 Documentation and Snapcraft features are developed in the same environment. If you've
-previously set up your local machine to develop Snapcraft features, skip to the next
+previously set up your local machine to develop Snapcraft, skip to the next
 section.
 
 Start by `creating a personal fork <https://github.com/canonical/snapcraft/fork>`_ of
@@ -73,8 +73,12 @@ Inside the project directory, set up the development environment:
 If these commands complete without error, your local environment is ready.
 
 
+Prepare for a task
+------------------
+
+
 Choose a task
--------------
+~~~~~~~~~~~~~
 
 Tasks come in different sizes and complexity. It's important to choose a task that you
 have the capacity to finish, and plan accordingly.
@@ -93,7 +97,7 @@ review the issue and assign it to you.
 
 
 Create a branch
----------------
+~~~~~~~~~~~~~~~
 
 Before you can begin writing, sync your local copy of the Snapcraft code and create a
 new branch.
@@ -133,15 +137,31 @@ example, if you're working on GitHub issue #2135, and updating the command refer
 you could name the branch ``issue-2135-command-reference``.
 
 
-Write and test
---------------
+Document
+--------
 
-Next, make your changes to the docs in the ``docs`` directory. There are writing styles
-and patterns that Snapcraft follows. If you need guidance on the writing conventions,
-explore the related links on this page.
+
+Write
+~~~~~
+
+All writing takes place in the ``docs`` directory. Pay attention to how the directory
+structure, the document file names, and ``index.rst`` files combine to form the document
+hierarchy.
+
+These documents are written for a technically-inclined user. Consult this page's related
+links for the conventions of tone, style, accessibility, and formatting. If you're
+searching for a way to express something not covered in the guides, explore the rest of
+these documents. They provide many examples of effective writing.
+
+If you're publishing a new page, rewriting a page, or changing multiple files, document
+your work as an entry in the Documentation section of the version's release notes.
 
 If you're adding a page, rewriting a page, or making changes to multiple files, document
 your work as an entry in the *Documentation* section of the version's release notes.
+
+
+Test
+~~~~
 
 When you're ready to preview your changes, save the files you worked on, then build the
 site locally:
@@ -150,7 +170,7 @@ site locally:
 
     make docs
 
-If successful, the terminal will read:
+If successful, the terminal reads:
 
 .. code-block:: bash
 
@@ -169,7 +189,7 @@ If everything looks good, check for problems in your code:
 
 
 Commit
-------
+~~~~~~
 
 Documentation changes are only made permanent through a Git commit:
 
@@ -193,8 +213,12 @@ Committing triggers the pre-commit hook, which runs autoformatters. If any files
 autoformatted, re-add them and redo the commit.
 
 
+Review for quality
+------------------
+
+
 Send for review
----------------
+~~~~~~~~~~~~~~~
 
 When you've committed all your work and you're ready to have it reviewed, push it to
 your fork:
@@ -209,9 +233,9 @@ branch has more than one commit, reuse the message from the first.
 
 
 Complete the review
--------------------
+~~~~~~~~~~~~~~~~~~~
 
-Before your PR is merged, it needs to pass all automatic checks, and two separate
+Before your PR is merged, it must pass all automatic checks, and it needs separate
 approvals from two maintainers.
 
 If there are any issues in your branch that your local testing didn't catch, then the
@@ -234,8 +258,8 @@ maintainers to see whether any additional changes were made.
 Once your PR is approved and merged, your contribution is complete.
 
 
-Help and support
-----------------
+Get help and support
+--------------------
 
 Open source contribution can be difficult. Even the most experienced writers become
 tangled or have moments of uncertainty.
