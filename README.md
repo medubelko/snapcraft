@@ -2,6 +2,8 @@
 
 # Snapcraft
 
+!!! TEST
+
 [![Snapcraft][snapcraft-badge]][snapcraft-site]
 [![Documentation Status][rtd-badge]][rtd-latest]
 [![Spread tests][gha-spread-badge]][gha-spread]
